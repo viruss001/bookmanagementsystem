@@ -11,7 +11,7 @@ function Filter() {
   const getbook = async () => {
     const data = await fetch(`http://127.0.0.1:8000/getauthor`);
     const res = await data.json();
-    console.log(res);
+    //console.log(res);
 
     setauthor(res);
   };
@@ -21,24 +21,26 @@ function Filter() {
     console.log(res);
   };
 
-  function handle(event) {
-    setauthorname(event.target.innerText);
-    //console.log(event.target.innerText);
+  const handle = (event) => {
+    setauthorname(event.target.value);
+    console.log("1");
     console.log(authorname);
-  }
-  function handlesubmit(event) {
-    getauthor();
-  }
+  };
+  const handleMouse = () => {
+    console.log("2");
+  };
 
   return (
     <div className="d-flex ">
       <select className="from-control m-3" onChange={handle}>
         <option value="Choice">Choice</option>
         {author.map((opt, index) => (
-          <option key={index}>{opt.author_name}</option>
+          <option value={opt.author_name} key={index} onClick={handleMouse}>
+            {opt.author_name}
+          </option>
         ))}
       </select>
-      {/* <button onClick={handlesubmit}>submit</button> */}
+      {/* <button >submit</button> */}
     </div>
   );
 }
