@@ -23,7 +23,7 @@ function Filter() {
 
   const handle = (event) => {
     setauthorname(event.target.value);
-    console.log("1");
+    // console.log("1");
     console.log(authorname);
   };
   const handleMouse = () => {
@@ -35,7 +35,7 @@ function Filter() {
       <select className="from-control m-3" onChange={handle}>
         <option value="Choice">Choice</option>
         {author.map((opt, index) => (
-          <option value={opt.author_name} key={index} onClick={handleMouse}>
+          <option value={opt.author_name} key={index}>
             {opt.author_name}
           </option>
         ))}
