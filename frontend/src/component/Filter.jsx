@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 function Filter() {
   useEffect(() => {
@@ -21,21 +21,27 @@ function Filter() {
     console.log(res);
   };
 
-  const handle = (event) => {
-    setauthorname(event.target.value);
-    // console.log("1");
+  const call = useCallback(() => {
     console.log(authorname);
-  };
-  const handleMouse = () => {
-    console.log("2");
-  };
-
+  }, [authorname]);
   return (
     <div className="d-flex ">
-      <select className="from-control m-3" onChange={handle}>
+      <select
+        className="from-control m-3"
+        onChange={(event) => {
+          setauthorname(event.target.value);
+          console.log(authorname);
+        }}
+      >
         <option value="Choice">Choice</option>
         {author.map((opt, index) => (
-          <option value={opt.author_name} key={index}>
+          <option
+            value={opt.author_name}
+            key={index}
+            onClick={() => {
+              console.log(authorname);
+            }}
+          >
             {opt.author_name}
           </option>
         ))}
