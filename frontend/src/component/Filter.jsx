@@ -1,23 +1,23 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookContext from "../context/BookContext";
 function Filter() {
   const { setBookData } = useContext(BookContext);
   useEffect(() => {
-    getbook();
+    getAuthorName();
   }, []);
   const navi = useNavigate();
   const [author, setauthor] = useState([]);
   const [authorname, setauthorname] = useState("");
 
-  const getbook = async () => {
+  const getAuthorName = async () => {
     const data = await fetch(`http://127.0.0.1:8000/getauthor`);
     const res = await data.json();
     //console.log(res);
 
     setauthor(res);
   };
-  const getauthor = async () => {
+  const getBooksbyauthor = async () => {
     const data = await fetch(`http://127.0.0.1:8000/getauthor/${authorname}`);
     const res = await data.json();
     console.log(res);
@@ -26,13 +26,10 @@ function Filter() {
   // when authorname is null then it not run
   useEffect(() => {
     if (authorname !== "") {
-      getauthor();
+      getBooksbyauthor();
     }
   }, [authorname]);
 
-  const call = useCallback(() => {
-    console.log(authorname);
-  }, [authorname]);
   // console.log(authorname);
   return (
     <div className="d-flex ">
@@ -42,7 +39,7 @@ function Filter() {
           setauthorname(event.target.value);
         }}
       >
-        <option value="Choice">Choice</option>
+        <option value="Choice">Author name</option>
         {author.map((opt, index) => (
           <option
             value={opt.author_name}

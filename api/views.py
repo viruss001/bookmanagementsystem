@@ -1,10 +1,9 @@
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import *
-from .serializer import *
+from .models import Author, Book
+from .serializer import AuthorSerializer, BookSerializer
 
 
 # Create your views here.
@@ -49,4 +48,11 @@ def getAuthor(request, name):
     obj = Author.objects.get(author_name=name.lower())
     obj1 = Book.objects.filter(book_author=obj)
     seri = BookSerializer(obj1, many=True)
+    return Response(seri.data)
+
+
+@api_view(["GET"])
+def Search(request, name):
+    obj = Author.objects.filter(author_name__icontains=name)
+    seri = AuthorSerializer(obj, many=True)
     return Response(seri.data)
