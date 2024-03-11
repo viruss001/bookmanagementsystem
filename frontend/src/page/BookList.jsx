@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Listcomponent from "../component/Listcomponent";
 import BookContext from "../context/BookContext";
 
 function BookList() {
   const { Bookdata } = useContext(BookContext);
+  useEffect(() => {}, [Bookdata]);
+
   return (
     <>
       <div className="row  container m-5 ps-5">

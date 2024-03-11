@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import BookContext from "../context/BookContext";
 function Filter() {
+  const { setBookData } = useContext(BookContext);
   useEffect(() => {
     getbook();
   }, []);
-
+  const navi = useNavigate();
   const [author, setauthor] = useState([]);
   const [authorname, setauthorname] = useState("");
 
@@ -19,18 +21,25 @@ function Filter() {
     const data = await fetch(`http://127.0.0.1:8000/getauthor/${authorname}`);
     const res = await data.json();
     console.log(res);
+    setBookData(res);
   };
+  // when authorname is null then it not run
+  useEffect(() => {
+    if (authorname !== "") {
+      getauthor();
+    }
+  }, [authorname]);
 
   const call = useCallback(() => {
     console.log(authorname);
   }, [authorname]);
+  // console.log(authorname);
   return (
     <div className="d-flex ">
       <select
         className="from-control m-3"
         onChange={(event) => {
           setauthorname(event.target.value);
-          console.log(authorname);
         }}
       >
         <option value="Choice">Choice</option>
@@ -38,9 +47,9 @@ function Filter() {
           <option
             value={opt.author_name}
             key={index}
-            onClick={() => {
-              console.log(authorname);
-            }}
+            // onClick={() => {
+            //   console.log(authorname);
+            // }}
           >
             {opt.author_name}
           </option>

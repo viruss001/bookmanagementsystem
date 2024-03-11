@@ -47,6 +47,6 @@ def getAllAuthors(request):
 @api_view(["GET"])
 def getAuthor(request, name):
     obj = Author.objects.get(author_name=name.lower())
-    obj1 = Book.objects.get(book_author=obj)
-    seri = BookSerializer(obj1)
+    obj1 = Book.objects.filter(book_author=obj)
+    seri = BookSerializer(obj1, many=True)
     return Response(seri.data)
