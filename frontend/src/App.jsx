@@ -15,7 +15,9 @@ function App() {
         </h1>
       </div>
       <div className="container d-flex justify-content-center mt-5">
-        <Filter />
+        <div>
+          <Filter />
+        </div>
         <Search />
       </div>
 

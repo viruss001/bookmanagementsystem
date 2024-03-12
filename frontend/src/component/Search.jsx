@@ -22,6 +22,7 @@ function Search() {
     <div>
       <div className="searchBox">
         <input
+          className="from-control m-3"
           type="text"
           id="search"
           value={search}
@@ -31,15 +32,33 @@ function Search() {
           }}
         />
       </div>
-      <div className="result">
-        <ul>
-          {author.map((auth, index) => (
-            <li key={index}>{auth.author_name}</li>
-          ))}
+      {search ? (
+        <div
+          className="result overflow-y-scroll "
+          style={{
+            height: "50px",
+            width: "200px",
+            position: "absolute",
+            marginTop: "-15px",
+          }}
+        >
+          <ul style={{ listStyle: "none" }}>
+            {author.map((auth, index) => (
+              <li
+                key={index}
+                style={{ background: "", border: "2px solid gray" }}
+              >
+                {auth?.author_name}
+              </li>
+            ))}
 
-          {/* <li>react</li> */}
-        </ul>
-      </div>
+            {/* <li>react</li> */}
+          </ul>
+        </div>
+      ) : (
+        ""
+      )}
+      ;
     </div>
   );
 }
