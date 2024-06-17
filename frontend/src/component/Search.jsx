@@ -45,6 +45,7 @@ function Search() {
           <ul style={{ listStyle: "none" }}>
             {author.map((auth, index) => (
               <li
+                onClick={(e) => console.log(e.target.innerText)}
                 key={index}
                 style={{ background: "", border: "2px solid gray" }}
               >

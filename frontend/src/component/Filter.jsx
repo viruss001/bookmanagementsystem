@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import BookContext from "../context/BookContext";
 function Filter() {
   const { setBookData } = useContext(BookContext);
   useEffect(() => {
     getAuthorName();
   }, []);
-  const navi = useNavigate();
+  // const navi = useNavigate();
   const [author, setauthor] = useState([]);
   const [authorname, setauthorname] = useState("");
 
